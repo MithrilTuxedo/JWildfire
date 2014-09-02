@@ -41,4 +41,4 @@ FasterMath*
 MathTest*
 local.properties
 build/
-*.launcher
+*.launch
