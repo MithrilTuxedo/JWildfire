@@ -16,7 +16,7 @@
 */
 package org.jwildfire.base.mathlib;
 
-import odk.lang.FastMath;
+import net.jafama.FastMath;
 
 public final class FastMathLibImpl implements BaseMathLib {
 
