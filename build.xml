@@ -22,23 +22,23 @@
 		<fileset dir="${lib.dir}">
 			<include name="*.jar" />
 		</fileset>
-    <fileset dir="${izpack.dir}/IzPack">
-      <include name="lib/*.jar" />
-    </fileset>		
+		<fileset dir="${izpack.dir}/IzPack">
+			<include name="lib/*.jar" />
+		</fileset>
 		<pathelement path="${build.dir}" />
 	</path>
 
 
 	<target name="init">
-      <delete dir="${build.dir}" />
-  		<mkdir dir="${build.dir}" />
-    <delete dir="${dist.dir}" />
-    <mkdir dir="${dist.dir}" />
+		<delete dir="${build.dir}" />
+		<mkdir dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+		<mkdir dir="${dist.dir}" />
 	</target>
 
 	<target name="compile" depends="init" 
           description="Compile main source tree java files">
-    <javac destdir="${build.dir}"
+		<javac destdir="${build.dir}"
            target="1.6"
            source="1.6"
            debug="false"
@@ -46,11 +46,11 @@
            encoding="ISO-8859-1"
            optimize="true"
            failonerror="true">
-      <src path="${src.dir}" />
-      <classpath refid="build.classpath" />
-    </javac>
-  </target>
-	
+			<src path="${src.dir}" />
+			<classpath refid="build.classpath" />
+		</javac>
+	</target>
+
 	<target name="packageJWildfireJar" depends="compile" description="Package the JWildfire jar file">
 		<jar destfile="${jwildfire.jar.name}">
 			<fileset dir="${build.dir}" includes="org/jwildfire/" />
@@ -83,39 +83,39 @@
 	</target>
 
 	<target name="packageJWildfireAppletJar" depends="compile" description="Package the JWildfireApplet jar file">
-    <jar destfile="${applet.jar.name}">
-      <fileset dir="${build.dir}" includes="org/jwildfire/"/>
-      <fileset dir="${build.dir}" includes="net/goui/"/>
-      <fileset dir="${build.dir}" includes="com/kitfox/"/>
-      <fileset dir="${build.dir}" includes="odk/"/>
-      <zipfileset src="lib/svgSalamander-tiny.jar"/>
-      <manifest>
-        <attribute name="Main-Class" value="org.jwildfire.applet.JWildfireApplet"/>
-        <attribute name="Permissions" value="sandbox"/>
-        <attribute name="Codebase" value="http://www.andreas-maschke.de/java/JWildfireApplet"/>
-        <attribute name="Application-Name" value="JWildfireApplet"/>
-        <attribute name="Application-Library-Allowable-Codebase" value="http://www.andreas-maschke.de/java/JWildfireApplet"/>
-        <attribute name="Trusted-Library" value="true"/>
-        <!--
+		<jar destfile="${applet.jar.name}">
+			<fileset dir="${build.dir}" includes="org/jwildfire/" />
+			<fileset dir="${build.dir}" includes="net/goui/" />
+			<fileset dir="${build.dir}" includes="com/kitfox/" />
+			<fileset dir="${build.dir}" includes="odk/" />
+			<zipfileset src="lib/svgSalamander-tiny.jar" />
+			<manifest>
+				<attribute name="Main-Class" value="org.jwildfire.applet.JWildfireApplet" />
+				<attribute name="Permissions" value="sandbox" />
+				<attribute name="Codebase" value="http://www.andreas-maschke.de/java/JWildfireApplet" />
+				<attribute name="Application-Name" value="JWildfireApplet" />
+				<attribute name="Application-Library-Allowable-Codebase" value="http://www.andreas-maschke.de/java/JWildfireApplet" />
+				<attribute name="Trusted-Library" value="true" />
+				<!--
         <attribute name="Trusted-Only" value="true"/>
         -->
-      </manifest>     
-    </jar>
-  </target>
-	
-  <target name="packageLauncherJar" depends="compile" description="Package the Launcher jar file">
-    <jar destfile="${launcher.jar.name}">
-      <fileset dir="${build.dir}" includes="org/jwildfire/launcher/*"/>
-      <fileset dir="${build.dir}" includes="org/jwildfire/base/Tools.*"/>
-      <fileset dir="${build.dir}" includes="org/jwildfire/image/*"/>
-      <fileset dir="${build.dir}" includes="org/jwildfire/swing/ImagePanel.*"/>
-      <fileset dir="${src.dir}" includes="org/jwildfire/launcher/images/*.png"/>
-      <fileset dir="${src.dir}" includes="org/jwildfire/launcher/images/*.jpg"/>
-      <manifest>
-        <attribute name="Main-Class" value="org.jwildfire.launcher.Launcher"/>
-      </manifest>     
-    </jar>
-  </target>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="packageLauncherJar" depends="compile" description="Package the Launcher jar file">
+		<jar destfile="${launcher.jar.name}">
+			<fileset dir="${build.dir}" includes="org/jwildfire/launcher/*" />
+			<fileset dir="${build.dir}" includes="org/jwildfire/base/Tools.*" />
+			<fileset dir="${build.dir}" includes="org/jwildfire/image/*" />
+			<fileset dir="${build.dir}" includes="org/jwildfire/swing/ImagePanel.*" />
+			<fileset dir="${src.dir}" includes="org/jwildfire/launcher/images/*.png" />
+			<fileset dir="${src.dir}" includes="org/jwildfire/launcher/images/*.jpg" />
+			<manifest>
+				<attribute name="Main-Class" value="org.jwildfire.launcher.Launcher" />
+			</manifest>
+		</jar>
+	</target>
 
 	<target name="packageJWildfireCliJar" depends="compile" description="Package the JWildfireCli jar file">
 		<jar destfile="${cli.jar.name}">
@@ -129,38 +129,38 @@
 		</jar>
 	</target>
 
-  <target name="packageDist" depends="packageJWildfireJar, packageLauncherJar, packageJWildfireAppletJar" description="Package the distributable zip file">
-    <copy todir="${dist.dir}/lib">
-       <fileset file="${jwildfire.jar.name}"/>
-     </copy>  	
-    <copy todir="${dist.dir}/">
-       <fileset file="${launcher.jar.name}"/>
-     </copy>    
-    <copy todir="${dist.dir}/">
-       <fileset file="${applet.jar.name}"/>
-     </copy>
-    <copy todir="${dist.dir}/">
-       <fileset dir="build/launcher" includes="start_linux.sh start_windows.bat start_mac.command"/>
-     </copy>
-  	<copy todir="${dist.dir}/">
-       <fileset file="CHANGES.txt" />
-       <fileset file="README_LAUNCH.txt" />
-       <fileset file="README!!!.txt" />
-       <fileset file="README_SUPPORT.txt" />
-       <fileset file="README_APPLET.txt" />
-      <fileset file="Delphi/JWildfire.exe" />
-     </copy>    
-    <zip destfile="${dist.name}">
-      <zipfileset dir="${dist.dir}/"/>
-      <zipfileset filemode="755" dir="${dist.dir}/" includes="start_*" />
-    </zip>
-  </target>
+	<target name="packageDist" depends="packageJWildfireJar, packageLauncherJar, packageJWildfireAppletJar" description="Package the distributable zip file">
+		<copy todir="${dist.dir}/lib">
+			<fileset file="${jwildfire.jar.name}" />
+		</copy>
+		<copy todir="${dist.dir}/">
+			<fileset file="${launcher.jar.name}" />
+		</copy>
+		<copy todir="${dist.dir}/">
+			<fileset file="${applet.jar.name}" />
+		</copy>
+		<copy todir="${dist.dir}/">
+			<fileset dir="build/launcher" includes="start_linux.sh start_windows.bat start_mac.command" />
+		</copy>
+		<copy todir="${dist.dir}/">
+			<fileset file="CHANGES.txt" />
+			<fileset file="README_LAUNCH.txt" />
+			<fileset file="README!!!.txt" />
+			<fileset file="README_SUPPORT.txt" />
+			<fileset file="README_APPLET.txt" />
+			<fileset file="Delphi/JWildfire.exe" />
+		</copy>
+		<zip destfile="${dist.name}">
+			<zipfileset dir="${dist.dir}/" />
+			<zipfileset filemode="755" dir="${dist.dir}/" includes="start_*" />
+		</zip>
+	</target>
 
-	 <taskdef name="izpack" classpathref="build.classpath" classname="com.izforge.izpack.ant.IzPackTask" />	
-	
-  <target name="izpack">
-	  <izpack input="jwildfire_izpack.xml"
-	    output="${installer.dir}/jwildfire-installer.jar" installerType="standard" inheritAll="true" basedir="${dist.dir}" izPackDir="${izpack.dir}/IzPack/" />
-  </target>
-	
+	<taskdef name="izpack" classpathref="build.classpath" classname="com.izforge.izpack.ant.IzPackTask" />
+
+	<target name="izpack">
+		<izpack input="jwildfire_izpack.xml"
+			output="${installer.dir}/jwildfire-installer.jar" installerType="standard" inheritAll="true" basedir="${dist.dir}" izPackDir="${izpack.dir}/IzPack/" />
+	</target>
+
 </project>
