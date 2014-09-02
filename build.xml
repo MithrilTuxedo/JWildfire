@@ -2,17 +2,22 @@
 
 <project name="JWildfire" basedir="." default="packageDist">
 
-  <property name="dist.dir" location="build/dist" />
-  <property name="izpack.dir" location="F:/DEV" />
-  <property name="installer.dir" location="build/installer" />
+	<!-- local override properties -->
+	<property file="local.properties" />
+
+	<!-- default properties -->
+	<property name="dist.dir" location="build/dist" />
+	<property name="izpack.dir" location="F:/DEV" />
+	<property name="installer.dir" location="build/installer" />
 	<property name="build.dir" location="build/classes" />
 	<property name="lib.dir" location="lib" />
 	<property name="src.dir" location="src/" />
 	<property name="jwildfire.jar.name" value="build/j-wildfire.jar" />
-  <property name="applet.jar.name" value="build/j-wildfire-applet.jar" />
-  <property name="launcher.jar.name" value="build/j-wildfire-launcher.jar" />
-  <property name="dist.name" value="build/j-wildfire.zip" />
-	
+	<property name="applet.jar.name" value="build/j-wildfire-applet.jar" />
+	<property name="cli.jar.name" value="build/j-wildfire-cli.jar" />
+	<property name="launcher.jar.name" value="build/j-wildfire-launcher.jar" />
+	<property name="dist.name" value="build/j-wildfire.zip" />
+
 	<path id="build.classpath">
 		<fileset dir="${lib.dir}">
 			<include name="*.jar" />
