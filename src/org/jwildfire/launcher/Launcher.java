@@ -112,7 +112,7 @@ public class Launcher {
 
   private JTextArea logTextArea;
   private JTextField maxMemField;
-  private JComboBox jdkCmb;
+  private JComboBox<String> jdkCmb;
   private JPanel mainPanel;
   private JPanel imgDisplayPanel;
   private JTabbedPane mainTabbedPane;
@@ -285,7 +285,7 @@ public class Launcher {
     btnAddJavaRuntime.setBorderPainted(false);
     btnAddJavaRuntime.setBackground(Color.BLACK);
 
-    jdkCmb = new JComboBox();
+    jdkCmb = new JComboBox<String>();
     jdkCmb.setBounds(142, 6, 384, 22);
     mainPanel.add(jdkCmb);
     jdkCmb.setForeground(SystemColor.menu);
@@ -470,7 +470,7 @@ public class Launcher {
     }
   }
 
-  public JComboBox getJdkCmb() {
+  public JComboBox<String> getJdkCmb() {
     return jdkCmb;
   }
 
