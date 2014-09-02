@@ -229,6 +229,7 @@ public class JWildfireCli {
 			List<Flame> flames = new FlameReader(sPrefs).readFlames(flameFilename);
 			Flame flame = flames.get(0);
 			if (sLowMemoryMode) {
+				// FIXME: something is wrong with my math here.
 				flame.setCamZoom(flame.getCamZoom() * zoomScale);
 //				flame.setPixelsPerUnit(flame.getPixelsPerUnit() * zoomScale);
 				System.out.println("Old centre: " + flame.getCentreX() + ':' + flame.getCentreY());
