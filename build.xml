@@ -116,6 +116,18 @@
     </jar>
   </target>
 
+	<target name="packageJWildfireCliJar" depends="compile" description="Package the JWildfireCli jar file">
+		<jar destfile="${cli.jar.name}">
+			<fileset dir="${build.dir}" includes="org/jwildfire/" />
+			<fileset dir="${build.dir}" includes="net/goui/" />
+			<zipfileset src="lib/commons-cli-1.2.jar" />
+			<zipfileset src="lib/jafama.jar" />
+			<manifest>
+				<attribute name="Main-Class" value="org.jwildfire.headless.JWildfireCli" />
+			</manifest>
+		</jar>
+	</target>
+
   <target name="packageDist" depends="packageJWildfireJar, packageLauncherJar, packageJWildfireAppletJar" description="Package the distributable zip file">
     <copy todir="${dist.dir}/lib">
        <fileset file="${jwildfire.jar.name}"/>
