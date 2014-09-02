@@ -247,9 +247,9 @@ public class Prefs extends ManagedObject {
   private int tinaRandomMovieBatchSize = 12;
   @Property(description = "Red component of the background color of randomly generated flames", category = PropertyCategory.TINA)
   private int tinaRandomBatchBGColorRed = 0;
-  @Property(description = "Red component of the background color of randomly generated flames", category = PropertyCategory.TINA)
+  @Property(description = "Green component of the background color of randomly generated flames", category = PropertyCategory.TINA)
   private int tinaRandomBatchBGColorGreen = 0;
-  @Property(description = "Red component of the background color of randomly generated flames", category = PropertyCategory.TINA)
+  @Property(description = "Blue component of the background color of randomly generated flames", category = PropertyCategory.TINA)
   private int tinaRandomBatchBGColorBlue = 0;
   @Property(description = "How to refresh the thumbnail ribbon after creating a new random batch", category = PropertyCategory.TINA, editorClass = RandomBatchRefreshTypeEditor.class)
   private RandomBatchRefreshType tinaRandomBatchRefreshType = RandomBatchRefreshType.CLEAR;
