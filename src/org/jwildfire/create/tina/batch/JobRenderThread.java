@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.jwildfire.base.QualityProfile;
 import org.jwildfire.base.ResolutionProfile;
+import org.jwildfire.base.Tools;
 import org.jwildfire.create.tina.base.Flame;
 import org.jwildfire.create.tina.io.FlameReader;
 import org.jwildfire.create.tina.render.FlameRenderer;
@@ -90,10 +91,10 @@ public class JobRenderThread implements Runnable {
                 job.setElapsedSeconds(((double) (t1 - t0) / 1000.0));
                 new ImageWriter().saveImage(res.getImage(), primaryFilename);
                 if (res.getHDRImage() != null) {
-                  new ImageWriter().saveImage(res.getHDRImage(), job.getImageFilename(flame.getStereo3dMode()) + ".hdr");
+                  new ImageWriter().saveImage(res.getHDRImage(), job.getImageFilename(flame.getStereo3dMode()) + '.' + Tools.FILEEXT_HDR);
                 }
                 if (res.getHDRIntensityMap() != null) {
-                  new ImageWriter().saveImage(res.getHDRIntensityMap(), job.getImageFilename(flame.getStereo3dMode()) + ".intensity.hdr");
+                  new ImageWriter().saveImage(res.getHDRIntensityMap(), job.getImageFilename(flame.getStereo3dMode()) + ".intensity." + Tools.FILEEXT_HDR);
                 }
               }
               job.setFinished(true);
