@@ -119,17 +119,17 @@
 
 	<target name="packageJWildfireCliJar" depends="compile" description="Package the JWildfireCli jar file">
 		<jar destfile="${cli.jar.name}">
-			<fileset dir="${build.dir}" includes="org/jwildfire/" />
-			<fileset dir="${build.dir}" includes="net/goui/" />
 			<zipfileset src="lib/commons-cli-1.2.jar" />
-			<zipfileset src="lib/jafama.jar" />
+			<fileset dir="${build.dir}" includes="org/jwildfire/headless/*" />
 			<manifest>
+				<!-- Use the main jar file. -->
+				<attribute name="Class-Path" value="lib/j-wildfire.jar"/>
 				<attribute name="Main-Class" value="org.jwildfire.headless.JWildfireCli" />
 			</manifest>
 		</jar>
 	</target>
 
-	<target name="packageDist" depends="packageJWildfireJar, packageLauncherJar, packageJWildfireAppletJar" description="Package the distributable zip file">
+	<target name="packageDist" depends="packageJWildfireJar, packageLauncherJar, packageJWildfireAppletJar, packageJWildfireCliJar" description="Package the distributable zip file">
 		<copy todir="${dist.dir}/lib">
 			<fileset file="${jwildfire.jar.name}" />
 		</copy>
@@ -138,6 +138,9 @@
 		</copy>
 		<copy todir="${dist.dir}/">
 			<fileset file="${applet.jar.name}" />
+		</copy>
+		<copy todir="${dist.dir}/">
+			<fileset file="${cli.jar.name}" />
 		</copy>
 		<copy todir="${dist.dir}/">
 			<fileset dir="build/launcher" includes="start_linux.sh start_windows.bat start_mac.command" />
