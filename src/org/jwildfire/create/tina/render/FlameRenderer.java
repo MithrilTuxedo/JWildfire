@@ -128,6 +128,7 @@ public class FlameRenderer {
   }
 
   private void initRaster(int pImageWidth, int pImageHeight) {
+	System.out.printf("initRaster(%d, %d)\n", pImageWidth, pImageHeight);
     initRasterSizes(pImageWidth, pImageHeight);
     raster = allocRaster();
   }
@@ -685,7 +686,7 @@ public class FlameRenderer {
   private void iterate(int pPart, int pParts, List<List<RenderPacket>> pPackets, List<RenderSlice> pSlices, double pSliceThicknessMod, int pSliceThicknessSamples) {
     int SliceThicknessMultiplier = pSliceThicknessMod > MathLib.EPSILON && pSliceThicknessSamples > 0 ? pSliceThicknessSamples : 1;
     long nSamples = (long) ((flame.getSampleDensity() * (double) rasterSize / (double) flame.calcPostSymmetrySampleMultiplier() / (double) flame.calcStereo3dSampleMultiplier() / (double) SliceThicknessMultiplier + 0.5));
-    int PROGRESS_STEPS = 50;
+    int PROGRESS_STEPS = 1000;
     if (progressUpdater != null && pPart == 0) {
       progressChangePerPhase = (PROGRESS_STEPS - 1) * pParts;
       progressUpdater.initProgress(progressChangePerPhase * progressDisplayPhaseCount);
