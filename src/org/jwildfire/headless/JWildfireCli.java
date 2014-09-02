@@ -193,7 +193,7 @@ public class JWildfireCli {
 			if (sLowMemoryMode) {
 				// check dimensions
 				if (sWidth % 8 != 0 || sHeight % 8 != 0) {
-					System.err.println("Low-mem width and height must each be a multiple of 8.");
+					System.err.println("For low-mem, width and height must each be a multiple of 8.");
 					System.exit(1);
 				}
 				if (flameFilename.endsWith(Tools.FILEEXT_FLAME)) {
